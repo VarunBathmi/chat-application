@@ -14,7 +14,7 @@ function ChatBox() {
   const [typingUser, setTypingUser] = useState("");
 
   useEffect(() => {
-    fetch("https://chat-application-backend-7fmp.onrender.com/api/messages")
+    fetch("https://chat-application-backend-7tmp.onrender.com/api/messages")
       .then((res) => res.json())
       .then((data) => setMessages(data))
       .catch((err) => console.log("Error fetching messages:", err));

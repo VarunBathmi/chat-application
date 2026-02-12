@@ -15,13 +15,19 @@ const server = http.createServer(app);
 // Socket.io setup with CORS
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://chat-app-frontend-livid-seven.vercel.app",
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://chat-app-frontend-livid-seven.vercel.app",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // MongoDB Connection
