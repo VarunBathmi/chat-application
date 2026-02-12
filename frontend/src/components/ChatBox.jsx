@@ -4,7 +4,7 @@ import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 import "./ChatBox.css";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://chat-application-backend-7tmp.onrender.com");
 
 function ChatBox() {
   const [messages, setMessages] = useState([]);
@@ -14,7 +14,7 @@ function ChatBox() {
   const [typingUser, setTypingUser] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/messages")
+    fetch("https://chat-application-backend-7fmp.onrender.com/api/messages")
       .then((res) => res.json())
       .then((data) => setMessages(data))
       .catch((err) => console.log("Error fetching messages:", err));
