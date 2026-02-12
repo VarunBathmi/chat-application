@@ -45,12 +45,16 @@ app.get("/", (req, res) => {
 app.get("/api/messages", async (req, res) => {
   try {
     const messages = await Message.find().sort({ timestamp: 1 }).limit(50);
+    console.log("Messages fetched:", messages.length);
     res.json(messages);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch messages" });
+    console.error("Error fetching messages:", error);
+    res.status(500).json({
+      error: "Failed to fetch messages",
+      details: error.message,
+    });
   }
 });
-
 // Socket.io Connection Handler
 io.on("connection", (socket) => {
   console.log("👤 New user connected:", socket.id);

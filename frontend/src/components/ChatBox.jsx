@@ -16,8 +16,20 @@ function ChatBox() {
   useEffect(() => {
     fetch("https://chat-application-backend-7tmp.onrender.com/api/messages")
       .then((res) => res.json())
-      .then((data) => setMessages(data))
-      .catch((err) => console.log("Error fetching messages:", err));
+      .then((data) => {
+        console.log("Messages received:", data);
+        // Check if data is array, otherwise set empty array
+        if (Array.isArray(data)) {
+          setMessages(data);
+        } else {
+          console.error("Invalid data format:", data);
+          setMessages([]); // Empty array as fallback
+        }
+      })
+      .catch((err) => {
+        console.log("Error fetching messages:", err);
+        setMessages([]); // Empty array on error
+      });
 
     socket.on("receive-message", (data) => {
       setMessages((prev) => [...prev, data]);
